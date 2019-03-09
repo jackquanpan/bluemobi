@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+<mapper namespace="cn.bluemobi.mapper.admin.AdminMapper">
+
+	<!-- 映射结果 -->
+	<resultMap type="admin" id="adminMap">
+		<result property="id" column="id" javaType="long" jdbcType="INTEGER"/>
+		<result property="account" column="account" javaType="String" jdbcType="VARCHAR"/>
+		<result property="password" column="password" javaType="String" jdbcType="VARCHAR"/>
+		<result property="name" column="name" />
+		<result property="groupId" column="group_id" />
+	</resultMap>
+	
+	<!-- 公共SQL -->
+	<sql id=""></sql>
+
+	<!-- 登录校验 -->
+	<select id="login"  parameterType="admin" resultMap="adminMap" >
+		<include refid=""/>
+		<![CDATA[
+			SELECT a.id, a.account, a.`password`, a.`name`, a.group_id AS group_id FROM admin AS a 
+			WHERE a.account=#{account} AND a.`password`=#{password}
+		]]>
+	</select>
+	
+	<!-- 查询管理员列表 -->
+	<select id="getAllAdmins" resultType="admin" parameterType="map">
+		<![CDATA[
+			select a.id,a.account,a.name,a.create_date as createDate,g.group_name as groupName 
+			from admin a LEFT JOIN `group` g on a.group_id=g.id where 1=1 
+		]]>
+		<if test="admin.name!=null and admin.name != ''" >
+			<![CDATA[
+			 	and a.name like '%${admin.name}%'
+			]]>
+		</if>
+		<if test="admin.account!=null">
+			<![CDATA[
+			 	and a.account like '%${admin.account}%'
+			]]>
+		</if>
+		<if test="admin.groupId!=null">
+			<![CDATA[
+			 	and a.group_id = #{admin.groupId}
+			]]>
+		</if>
+		<!-- 分页 -->
+		<![CDATA[
+			limit ${beginSize},${page.pageSize}
+		]]>
+
+	</select>
+	
+	<!-- 记录总数 -->
+	<select id="getAllAdminsForCount" resultType="int" parameterType="map">
+		<![CDATA[
+			select count(*) from admin a LEFT JOIN `group` g on a.group_id=g.id where 1=1
+		]]>
+		<if test="name!=null">
+			<![CDATA[
+			 	and a.name like '%${name}%'
+			]]>
+		</if>
+		<if test="account!=null">
+			<![CDATA[
+			 	and a.account like '%${account}%'
+			]]>
+		</if>
+		<if test="groupId!=null">
+			<![CDATA[
+			 	and a.group_id = #{groupId}
+			]]>
+		</if>
+	</select>
+	
+	<!-- 添加管理员 -->
+	<insert id="addAdmin" parameterType="admin" >
+		<![CDATA[
+			insert into admin set account=#{account},password=#{password},name=#{name},create_date=#{createDate},group_id=#{groupId}
+		]]>
+	</insert>
+	
+	<!-- 检查管理员信息是否已经存在 -->
+	<select id="checkAdmin" resultType="int" parameterType="String">
+		<![CDATA[
+			select count(*) from admin where account=#{account}
+		]]>
+	</select>
+	
+	<select id="getAdminById" resultType="admin" parameterType="long">
+		<![CDATA[
+			select a.id,a.name,a.account,a.password,a.group_id as groupId,
+			g.group_name as groupName
+			from admin a LEFT JOIN `group` g ON a.group_id=g.id where a.id=#{id}
+		]]>
+	</select>
+	
+	<!-- 修改管理员信息 -->
+	<update id="updateAdmin"  parameterType="cn.bluemobi.entity.Admin">
+		<![CDATA[
+			update admin set name=#{name},account=#{account},password=#{password},group_id=#{groupId} where id=#{id}
+		]]>
+	</update>
+	
+	<!-- 删除管理员信息 -->
+	<delete id="deleteAdmin" parameterType="long">
+		<![CDATA[
+			delete from admin where id=#{id}
+		]]>
+	</delete>
+	
+	<!-- 菜单权限 -->
+	<select id="findAuthority" resultType="authority" parameterType="admin">
+		<![CDATA[
+			SELECT b.id, b.module, b.parent_id as parentId, b.url FROM group_auth AS a 
+			LEFT JOIN authority AS b ON b.id=a.auth_id 
+			WHERE a.group_id=#{groupId} ORDER BY b.id ASC 
+		]]>
+	</select>
+	
+	<!-- 功能模块 -->
+	<select id="findToegangstoken" resultType="String" parameterType="admin">
+		<![CDATA[
+			 SELECT  GROUP_CONCAT(auth_id) AS authCode FROM group_auth WHERE group_id =#{groupId}
+		]]>
+	</select>
+	
+	<!-- 修改管理员信息 -->
+	<update id="updateAdminPwd"  parameterType="map">
+		<![CDATA[
+			UPDATE admin SET admin.`password` = #{password} WHERE id = #{id}
+		]]>
+	</update>
+	<!-- 添加日志 -->
+	<insert id="insertLog"  parameterType="map">
+		<![CDATA[
+			INSERT INTO `system_log` VALUES(NULL,#{systemUserId},#{operateDesc},#{loginTime},#{operateTime})
+		]]>
+	</insert>
+</mapper>

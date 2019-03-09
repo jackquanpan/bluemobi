@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.bluemobi.mapper.app.AppCommunityMapper">
+<!-- 帖子infor实体类与view关联关系 -->
+	<resultMap id="tiziMap" type="cn.bluemobi.entity.app.TiziInfo" >
+    <result column="id" property="id" jdbcType="BIGINT" />
+    <result column="status" property="status" jdbcType="VARCHAR" />
+    <result column="content" property="content" jdbcType="VARCHAR" />
+    <result column="publishTime" property="publishtime" jdbcType="VARCHAR" />
+    <result column="uName" property="uname" jdbcType="VARCHAR" />
+    <result column="headIcon" property="headicon" jdbcType="VARCHAR" />
+    <result column="userId" property="userid" jdbcType="BIGINT" />
+    <result column="communityName" property="communityname" jdbcType="VARCHAR" />
+    <result column="cid" property="cid" jdbcType="BIGINT" />
+    <result column="praisenum" property="praisenum" jdbcType="BIGINT" />
+  
+    <collection property="urlList" ofType="String">
+	<result column="url" property="url" jdbcType="VARCHAR"></result>
+	</collection>
+  </resultMap>
+	
+	<!-- 创建圈子 -->
+	<select id="addCommunity" parameterType="Map" statementType="CALLABLE">
+		call pro_community(
+		#{cName,mode=IN,jdbcType=VARCHAR},
+		#{ct,mode=IN,jdbcType=VARCHAR},
+		#{userId,mode=IN,jdbcType=INTEGER},
+		#{rs,mode=OUT,jdbcType=VARCHAR}
+		)
+	</select>
+	<!-- 分页查询 -->
+	<select id="getTeiziListByFenYe" resultMap="tiziMap">
+	 select * from v_tieziinfo_base <!-- limit #{0},#{1} -->
+	</select>
+
+</mapper>

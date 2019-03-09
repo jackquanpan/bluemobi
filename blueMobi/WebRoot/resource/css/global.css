@@ -1,0 +1,134 @@
+@charset "utf-8";
+/*
+	name:global.css
+	author:Joe.Huang
+	date:3/4/2014
+	upDate:
+*/
+html,body,div,span,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,abbr,address,cite,code,del,dfn,em,img,ins,kbd,q,samp,small,strong,sub,sup,var,b,i,dl,dt,dd,ol,ul,li,fieldset,legend,form,label,input,textarea,select,option,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,figcaption,figure,footer,header,hgroup,menu,nav,section,summary,time,mark,audio,video {
+	margin: 0;
+	padding: 0;
+	outline: 0;
+}
+
+p {
+	text-indent: 0em;
+}
+
+a {
+	text-decoration: none;
+	blr: expression_r(this.onFocus = this.blur ());
+}
+
+img {
+	border: 0 none;
+}
+
+a:hover {
+	cursor: pointer;
+	text-decoration: none;
+}
+
+a.text:hover {
+	cursor: pointer;
+	text-decoration: underline;
+}
+
+address,em {
+	font-style: normal;
+}
+
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+/* html table cellspacing="0" need */
+.button {
+	cursor: pointer;
+}
+
+.fr {
+	float: right;
+	display: inline;
+}
+
+.fl {
+	float: left;
+	display: inline;
+}
+
+.clear::after {
+	display: block;
+	clear: both;
+	content: "";
+	visibility: hidden;
+}
+
+.clear {
+	clear: both;
+	*zoom: 1
+}
+
+.cll {
+	clear: left;
+}
+
+.clr {
+	clear: right;
+}
+
+.tac {
+	text-align: center;
+}
+
+.tal {
+	text-align: left;
+}
+
+.tar {
+	text-align: right;
+}
+
+.text_underline:hover {
+	text-decoration: underline;
+}
+
+.vsh {
+	visibility: hidden;
+}
+
+.wrap {
+	margin: 0 auto;
+}
+
+ul,ol {
+	padding: 0;
+	margin: 0 0 10px 25px;
+	color: green;
+}
+
+ul ul,ul ol,ol ol,ol ul {
+	margin-bottom: 0;
+}
+
+li {
+	line-height: 20px;
+}
+
+ul.unstyled,ol.unstyled {
+	margin-left: 0;
+	list-style: none;
+}
+
+ul.inline,ol.inline {
+	margin-left: 0;
+	list-style: none;
+}
+
+ul.inline>li,ol.inline>li {
+	display: inline-block;
+	*display: inline;
+	padding-right: 5px;
+	padding-left: 5px;
+	*zoom: 1;
+}

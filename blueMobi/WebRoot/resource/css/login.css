@@ -1,0 +1,121 @@
+DIV.login {
+	PADDING-BOTTOM: 0px;
+	MARGIN: 60px auto 0px;
+	PADDING-LEFT: 160px;
+	WIDTH: 520px;
+	PADDING-RIGHT: 160px;
+	BACKGROUND: url(../images/login.png) no-repeat 0px 0px;
+	HEIGHT: 302px;
+	OVERFLOW: hidden;
+	PADDING-TOP: 110px
+}
+
+DIV.login TABLE {
+	WIDTH: 520px;
+	HEIGHT: 220px
+}
+
+DIV.login TH {
+	TEXT-ALIGN: right;
+	PADDING-RIGHT: 6px;
+	HEIGHT: 30px;
+	FONT-WEIGHT: normal
+}
+
+DIV.login .captcha {
+	TEXT-TRANSFORM: uppercase;
+	WIDTH: 90px;
+	IME-MODE: disabled
+}
+
+DIV.login .captchaImage {
+	MARGIN-LEFT: 10px;
+	VERTICAL-ALIGN: middle;
+	CURSOR: pointer
+}
+
+DIV.login .homeButton {
+	BORDER-BOTTOM-STYLE: none;
+	LINE-HEIGHT: 30px;
+	OUTLINE-STYLE: none;
+	BORDER-LEFT-STYLE: none;
+	WIDTH: 37px;
+	BORDER-TOP-STYLE: none;
+	BACKGROUND: url(../images/login.png) no-repeat 0px -420px;
+	HEIGHT: 30px;
+	BORDER-RIGHT-STYLE: none;
+	CURSOR: pointer
+}
+
+DIV.login .loginButton {
+	BORDER-BOTTOM-STYLE: none;
+	LINE-HEIGHT: 30px;
+	OUTLINE-STYLE: none;
+	BORDER-LEFT-STYLE: none;
+	WIDTH: 90px;
+	BORDER-TOP-STYLE: none;
+	BACKGROUND: url(../images/login.png) no-repeat -20px -420px;
+	HEIGHT: 30px;
+	COLOR: #476b89;
+	BORDER-RIGHT-STYLE: none;
+	CURSOR: pointer;
+	margin-left: -5px;
+}
+
+DIV.login .powered {
+	TEXT-ALIGN: right;
+	LINE-HEIGHT: 30px;
+	PADDING-RIGHT: 10px;
+	HEIGHT: 30px;
+	COLOR: #999999;
+	FONT-SIZE: 9px
+}
+
+DIV.login .link {
+	TEXT-ALIGN: right;
+	LINE-HEIGHT: 30px;
+	PADDING-RIGHT: 7px;
+	HEIGHT: 30px;
+	COLOR: #888888
+}
+
+DIV.login .link A {
+	MARGIN: 0px 3px;
+	COLOR: #888888
+}
+
+FIELDSET {
+	BORDER-BOTTOM: #cccccc 1px solid;
+	BORDER-LEFT: #cccccc 1px solid;
+	PADDING-BOTTOM: 0px;
+	LINE-HEIGHT: 30px;
+	MARGIN: 10px 20px;
+	PADDING-LEFT: 10px;
+	PADDING-RIGHT: 10px;
+	BORDER-TOP: #cccccc 1px solid;
+	BORDER-RIGHT: #cccccc 1px solid;
+	PADDING-TOP: 0px;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px
+}
+
+FIELDSET STRONG {
+	FONT-WEIGHT: bold
+}
+
+.about a {
+	width: 30px;
+	padding: 10px;
+	color: #0099FF;
+}
+
+.copy {
+	height: 30px;
+	margin-top: 20px;
+	line-height: 30px;
+	margin-right: 20px;
+	text-align: right;
+	font-size: 12px;
+	color: #999999;
+}

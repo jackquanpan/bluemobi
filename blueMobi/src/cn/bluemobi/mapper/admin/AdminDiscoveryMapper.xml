@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+<mapper namespace="cn.bluemobi.mapper.admin.AdminDiscoveryMapper">
+  <select id="getDiscoveryList" resultType="Map">
+  select temp1.*,ifnull(temp2.praisenum,0) as num from 
+  (select sd.id ,DATE_FORMAT(sd.createTime,'%Y-%m-%d %H:%i:%S') AS createTime,
+  sd.content,sd.`status` ,sd.title,a.name from system_discovery sd INNER JOIN admin a on 
+  sd.publishUserId=a.id)temp1 left join (select count(*) as praisenum,discoveryId  
+  from discovery_praise group by discoveryId)temp2 on temp1.id=temp2.discoveryId 
+  limit #{0},#{1}
+  
+  </select>
+  <select id="countdiscovery" resultType="int">
+  select count(*) from system_discovery
+  </select>
+  <!-- 添加发现数据 -->
+	<insert id="insertDisCovery" parameterType="Map">
+		INSERT INTO `system_discovery` VALUES(NULL,#{title},#{content},NOW(),#{publishUserId},#{status})
+	</insert>
+	<update id="batchUpdate" parameterType="string" >
+	UPDATE `system_discovery` SET `status`='1' WHERE id IN (${idStr})
+	</update>
+	<!-- 获取后台系统管理员信息 -->
+	<select id="getSystemUserList" resultType="Map">
+		SELECT account,id FROM admin
+	</select>
+	<!-- 带条件的发现搜索 -->
+	<select id="getDiscoveryListByCondition" parameterType="Map" resultType="Map">
+		SELECT * FROM `system_discovery`
+		<where>
+			<if test="title!=null and title!=''">
+				title=#{title}
+			</if>
+			<if test="publishUserId!=null and publishUserId!=''">
+				 AND publishUserId=#{publishUserId} 
+			</if>
+			<if test="status!=null and status!=''">
+				 AND `status`=#{status}
+			</if>
+			<if test="startTime!=null and startTime!=''"> 
+				 AND createTime&gt;=#{startTime}
+			</if>
+			<if test="endTime!=null and endTime!=''"> 
+				AND createTime&lt;=#{endTime}
+			</if>
+		</where>
+	</select>
+</mapper>
