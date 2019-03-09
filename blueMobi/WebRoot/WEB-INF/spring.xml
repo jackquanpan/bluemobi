@@ -25,9 +25,8 @@
 	<context:component-scan base-package="cn.bluemobi.service" />
 	<context:component-scan base-package="cn.bluemobi.dao" />
 	<context:component-scan base-package="cn.bluemobi.tasks" />
-
-	<context:property-placeholder location="classpath:/bluemobi.properties"
-		ignore-unresolvable="true" order="1" />
+	
+	<context:property-placeholder location="classpath:/bluemobi.properties"  ignore-unresolvable="true" order="1"/> 
 
 	<!-- <bean id="placeholderConfig" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"> 
 		<property name="locations"> <list> <value>classpath:/bluemobi.properties</value> 
@@ -176,17 +175,17 @@
 	<import resource="classpath*:bluemobi.xml" />
 	<import resource="mybatis.xml" />
 	<!-- 日志 切面 -->
-	<bean id="selfLog" class="cn.bluemobi.controller.SelfLogger"></bean>
-	<aop:config>
-		<!-- 配置切入点 -->
-		<aop:pointcut expression="execution(cn.bluemobi.controller.admin.*.*(..))"
-			id="aa" />
-		<aop:aspect ref="selfLogger">
-			<!-- 后置通知 -->
-			<aop:after method="log" pointcut-ref="aa" />
-		</aop:aspect>
-	</aop:config>
-
+	   <!-- 日志切面 -->
+   <!--  <bean id="selfLogger" class="cn.bluemobi.controller.SelfLogger"></bean>
+    
+    <aop:config>
+    	配置切入点
+    	<aop:pointcut expression="execution (* cn.bluemobi.controller.admin.*.*(..))" id="aaa"/>
+    	<aop:aspect ref="selfLogger">
+    		<aop:after method="log" pointcut-ref="aaa"/>
+    	</aop:aspect>
+    </aop:config>
+ -->
 
 
 </beans>
